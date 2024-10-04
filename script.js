@@ -51,7 +51,7 @@ function VerificaVitoria(jogador) {
 function RoboJoga() {
     if (gameOver) return;
 
-    // Lógica para o robô
+   
     let posicoesDisponiveis = [];
     for (let i = 1; i <= 9; i++) {
         if (tabuleiro[i] === "0") {
@@ -59,47 +59,47 @@ function RoboJoga() {
         }
     }
 
-    // Lógica simples para decidir a jogada
+
     let jogadaRobô;
     if (Math.random() < 0.5) {
-        // Escolha aleatória
+       
         jogadaRobô = posicoesDisponiveis[Math.floor(Math.random() * posicoesDisponiveis.length)];
     } else {
-        // Estratégia simples: tenta vencer ou bloquear
+      
         for (let i = 0; i < posicoesDisponiveis.length; i++) {
             let testePos = posicoesDisponiveis[i];
-            tabuleiro[testePos] = "O"; // Faz a jogada temporária
+            tabuleiro[testePos] = "O"; 
 
             if (VerificaVitoria("O")) {
-                jogadaRobô = testePos; // Vence
+                jogadaRobô = testePos; 
                 break;
             }
 
-            tabuleiro[testePos] = "0"; // Desfaz a jogada
+            tabuleiro[testePos] = "0"; 
         }
 
         if (!jogadaRobô) {
-            // Se não encontrou uma jogada vencedora, tenta bloquear
+            
             for (let i = 0; i < posicoesDisponiveis.length; i++) {
                 let testePos = posicoesDisponiveis[i];
-                tabuleiro[testePos] = "X"; // Faz a jogada temporária do jogador
+                tabuleiro[testePos] = "X"; 
 
                 if (VerificaVitoria("X")) {
-                    jogadaRobô = testePos; // Bloqueia
+                    jogadaRobô = testePos; 
                     break;
                 }
 
-                tabuleiro[testePos] = "0"; // Desfaz a jogada
+                tabuleiro[testePos] = "0";
             }
         }
         
-        // Se ainda não foi feita a jogada, joga aleatoriamente
+       
         if (!jogadaRobô) {
             jogadaRobô = posicoesDisponiveis[Math.floor(Math.random() * posicoesDisponiveis.length)];
         }
     }
 
-    // Realiza a jogada do robô
+
     document.getElementById(jogadaRobô).innerHTML = "O";
     tabuleiro[jogadaRobô] = "O";
     jogadas++;
